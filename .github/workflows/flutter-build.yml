@@ -49,6 +49,7 @@ env:
   # --- 新增：注入服务器地址和 Key ---
   RS_ID_SERVER: "${{ secrets.RS_ID_SERVER }}"
   RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
+  RS_API_SERVER: "${{ secrets.RS_API_SERVER }}"
 
 jobs:
   generate-bridge:
@@ -167,6 +168,12 @@ jobs:
         shell: bash
 
       - name: Build rustdesk
+        env:
+          # --- 注入你设置在 GitHub Secrets 中的变量 ---
+          RS_ID_SERVER: ${{ secrets.RS_ID_SERVER }}
+          RS_PUB_KEY: ${{ secrets.RS_PUB_KEY }}
+          RS_API_SERVER: ${{ secrets.RS_API_SERVER }}
+          RS_FIXED_PASSWORD: ${{ secrets.RS_FIXED_PASSWORD }}
         run: |
           # Windows: build RustDesk
           python3 .\build.py --portable --hwcodec --flutter --vram --skip-portable-pack
