@@ -1081,7 +1081,8 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "https://admin.rustdesk.com".to_owned()
+    // 关键修改：直接调用 Actions 中注入的环境变量
+    env!("RS_API_SERVER").to_owned()
 }
 
 #[inline]
