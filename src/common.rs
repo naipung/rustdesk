@@ -1081,8 +1081,7 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    // 关键修改：直接调用 Actions 中注入的环境变量
-    env!("RS_API_SERVER").to_owned()
+    "https://naipung.ccwu.cc:7043".to_owned()
 }
 
 #[inline]
