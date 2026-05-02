@@ -9,14 +9,6 @@ on:
       upload-tag:
         type: string
         default: "nightly"
-    # 【新增：声明接收来自主脚本的密钥】
-    secrets:
-      RS_ID_SERVER:
-        required: false
-      RS_API_SERVER:
-        required: false
-      RS_PUB_KEY:
-        required: false
 
 # NOTE: F-Droid builder script 'flutter/build_fdroid.sh' reads environment
 # variables from this workflow!
@@ -54,10 +46,6 @@ env:
   MACOS_P12_BASE64: "${{ secrets.MACOS_P12_BASE64 }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   SIGN_BASE_URL: "${{ secrets.SIGN_BASE_URL }}-2"
-  # --- 新增：注入服务器地址和 Key ---
-  RS_ID_SERVER: "${{ secrets.RS_ID_SERVER }}"
-  RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
-  RS_API_SERVER: "${{ secrets.RS_API_SERVER }}"
 
 jobs:
   generate-bridge:
@@ -176,12 +164,6 @@ jobs:
         shell: bash
 
       - name: Build rustdesk
-        env:
-          # --- 注入你设置在 GitHub Secrets 中的变量 ---
-          RS_ID_SERVER: ${{ secrets.RS_ID_SERVER }}
-          RS_PUB_KEY: ${{ secrets.RS_PUB_KEY }}
-          RS_API_SERVER: ${{ secrets.RS_API_SERVER }}
-          RS_FIXED_PASSWORD: ${{ secrets.RS_FIXED_PASSWORD }}
         run: |
           # Windows: build RustDesk
           python3 .\build.py --portable --hwcodec --flutter --vram --skip-portable-pack
