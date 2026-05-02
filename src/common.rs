@@ -2800,9 +2800,14 @@ mod tests {
             "https://api.telegram.org/bot123/sendMessage",
             "https://admin.example.com"
         ));
+        //去掉官方的API接口
+        //assert!(!should_use_tcp_proxy_for_api_url(
+        //    "https://admin.rustdesk.com/api/login",
+        //    "https://admin.rustdesk.com"
+        //));
         assert!(!should_use_tcp_proxy_for_api_url(
-            "https://admin.rustdesk.com/api/login",
-            "https://admin.rustdesk.com"
+            "",
+            ""
         ));
         assert!(!should_use_tcp_proxy_for_api_url(
             "https://admin.example.com/api/login",
