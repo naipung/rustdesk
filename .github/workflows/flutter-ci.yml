@@ -19,12 +19,6 @@ on:
 
 jobs:
   run-ci:
-    # 这里调用了子脚本
     uses: ./.github/workflows/flutter-build.yml
     with:
-      upload-artifact: false
-    # 【新增：安全传递密钥】
-    secrets:
-      RS_ID_SERVER: ${{ secrets.RS_ID_SERVER }}
-      RS_API_SERVER: ${{ secrets.RS_API_SERVER }}
-      RS_PUB_KEY: ${{ secrets.RS_PUB_KEY }}
+      upload-artifact: true
