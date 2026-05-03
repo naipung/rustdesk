@@ -1,6 +1,7 @@
-name: Build the flutter version of the RustDesk
+yamlname: Build the flutter version of the RustDesk
 
 on:
+  # 1. 允许其他工作流调用（保持原有功能）
   workflow_call:
     inputs:
       upload-artifact:
@@ -9,6 +10,16 @@ on:
       upload-tag:
         type: string
         default: "nightly"
+
+  # 2. 关键：增加 push 触发，让你提交代码后立即开始编译
+  push:
+    branches:
+      - master  # 如果你的主分支叫 main，请改为 main
+  
+  # 3. 增加手动触发按钮，方便你在网页上直接点
+  workflow_dispatch:
+
+# 后面的代码保持不变...
 
 # NOTE: F-Droid builder script 'flutter/build_fdroid.sh' reads environment
 # variables from this workflow!
