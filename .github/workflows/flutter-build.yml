@@ -103,6 +103,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -332,6 +339,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -490,6 +504,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -622,6 +643,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
 
       - name: Inject Secrets
         shell: pwsh
@@ -944,6 +972,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -1224,6 +1259,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -1396,6 +1438,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
 
       - name: Inject Secrets
         shell: pwsh
@@ -1735,6 +1784,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -1945,6 +2001,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -2026,6 +2089,13 @@ jobs:
         with:
           submodules: recursive
 
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
+
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
@@ -2094,6 +2164,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      # 每一处 checkout 之后都必须加上这一段
+      - name: Inject Secrets
+        shell: pwsh
+        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+        env:
+          PYTHONUTF8: 1
 
       - name: Inject Secrets
         shell: pwsh
