@@ -87,16 +87,17 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Restore bridge files
@@ -315,16 +316,17 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Install LLVM and Clang
@@ -472,16 +474,17 @@ jobs:
       - name: Install dependencies
         run: |
           brew install nasm yasm
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Install flutter
@@ -604,16 +607,17 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Import the codesign cert
@@ -924,16 +928,17 @@ jobs:
                tree \
                wget
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Install flutter
@@ -1203,16 +1208,17 @@ jobs:
                tree \
                wget
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Install flutter
@@ -1375,16 +1381,17 @@ jobs:
             sudo apt-get install -y qemu-user-static
           fi
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Set Swap Space
@@ -1712,16 +1719,17 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Modify vcpkg.json for armv7
@@ -1921,16 +1929,17 @@ jobs:
           - { target: x86_64-unknown-linux-gnu, arch: x86_64 }
           - { target: aarch64-unknown-linux-gnu, arch: aarch64 }
     steps:
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Download Binary
@@ -2001,16 +2010,17 @@ jobs:
               suffix: "",
             }
     steps:
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Download Binary
@@ -2069,16 +2079,17 @@ jobs:
     env:
       RELEASE_NAME: web-basic
     steps:
-      - name: Checkout source co      - name: Checkout source code
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 關鍵：拉取 hbb_common 子模塊
+          submodules: recursive
 
       - name: Inject Secrets
         shell: pwsh
         run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
         env:
-          PYTHONUTF8: 1  # 關鍵：修復你之前遇到的 Unicode 報錯
+          PYTHONUTF8: 1
+
 
 
       - name: Prepare env
