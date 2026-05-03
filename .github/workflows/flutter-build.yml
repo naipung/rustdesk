@@ -1,4 +1,4 @@
-yamlname: Build the flutter version of the RustDesk
+name: Build the flutter version of the RustDesk
 
 on:
   # 1. 允许其他工作流调用（保持原有功能）
