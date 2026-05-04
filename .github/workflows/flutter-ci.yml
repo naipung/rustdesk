@@ -26,8 +26,9 @@ jobs:
         vcpkgGitCommitId: '120deac3062162151622ca4860575a33844ba10b'
 
     - name: Install opus via vcpkg
+      shell: cmd
       run: |
-        & "$env:VCPKG_ROOT\vcpkg" install opus:x64-windows-static
+    %VCPKG_ROOT%\vcpkg install opus:x64-windows-static
 
     - name: Install Rust toolchain
       uses: actions-rs/toolchain@v1
