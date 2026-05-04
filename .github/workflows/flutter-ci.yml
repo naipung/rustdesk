@@ -1,26 +1,30 @@
-name: Full Flutter CI
+name: RustDesk CI
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
 
 jobs:
   build-windows:
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Inject Config
-        shell: bash
-        run: python inject_secrets.py "\${{ secrets.MY_SERVER }}" "\${{ secrets.MY_KEY }}"
-      - name: Build
-        run: python build.py --flutter --release
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: rustdesk-windows
-          path: target/release/rustdesk.exe
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+    - name: Install Rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: x86_64-pc-windows-msvc
+        override: true
+    - name: Build
+      run: cargo build --verbose --release
+    - name: Run tests
+      run: cargo test --verbose
