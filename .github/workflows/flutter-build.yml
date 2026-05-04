@@ -73,43 +73,80 @@ jobs:
     strategy:
       fail-fast: false
 
-  build-for-windows-flutter:
-    name: ${{ matrix.job.target }}
-    needs: [build-RustDeskTempTopMostWindow, generate-bridge]
-    runs-on: ${{ matrix.job.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        job:
-          # - { target: i686-pc-windows-msvc        , os: windows-2022                  }
-          # - { target: x86_64-pc-windows-gnu       , os: windows-2022                  }
-          - {
-              target: x86_64-pc-windows-msvc,
-              os: windows-2022,
-              arch: x86_64,
-              vcpkg-triplet: x64-windows-static,
-            }
-          # - { target: aarch64-pc-windows-msvc, os: windows-2022, arch: aarch64 }
-    steps:
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v6
-        with:
-          script: |
-            core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-            core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+build-for-windows-flutter:
+  name: ${{ matrix.job.target }}
+  needs: [build-RustDeskTempTopMostWindow, generate-bridge]
+  runs-on: ${{ matrix.job.os }}
+  strategy:
+    fail-fast: false
+    matrix:
+      job:
+        - {
+            target: x86_64-pc-windows-msvc,
+            os: windows-2022,
+            arch: x86_64,
+            vcpkg-triplet: x64-windows-static,
+          }
+  steps:
+    - name: Export GitHub Actions cache environment variables
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Checkout source code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
+    - name: Checkout source code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
-      # 每一处 checkout 之后都必须加上这一段
+    # 🔍 添加调试步骤
+    - name: Debug submodules and config
+      shell: bash
+      run: |
+        echo "=== 当前目录 ==="
+        pwd
+        echo "=== libs 目录内容 ==="
+        ls -la libs/ || echo "❌ libs 目录不存在"
+        echo "=== hbb_common 目录 ==="
+        ls -la libs/hbb_common/ 2>/dev/null || echo "❌ hbb_common 不存在"
+        echo "=== config.rs 文件 ==="
+        if [ -f "libs/hbb_common/src/config.rs" ]; then
+          echo "✅ config.rs 存在"
+          echo "=== config.rs 前20行 ==="
+          head -20 libs/hbb_common/src/config.rs
+          echo "=== RENDEZVOUS_SERVERS 配置 ==="
+          grep "RENDEZVOUS_SERVERS" libs/hbb_common/src/config.rs | head -2
+        else
+          echo "❌ config.rs 不存在"
+          exit 1
+        fi
+        echo "=== Git submodule 状态 ==="
+        git submodule status
 
-      - name: Inject Secrets
-        shell: pwsh
-        run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
-        env:
-          PYTHONUTF8: 1
+    - name: Inject Secrets
+      shell: pwsh
+      run: python inject_secrets.py "${{ secrets.MY_SERVER }}" "${{ secrets.MY_KEY }}"
+      env:
+        PYTHONUTF8: 1
+
+    - name: Verify injection
+      shell: bash
+      run: |
+        echo "=== 验证配置注入结果 ==="
+        echo "服务器地址:"
+        grep "RENDEZVOUS_SERVERS" libs/hbb_common/src/config.rs | head -1
+        echo "公钥:"
+        grep "RS_PUB_KEY" libs/hbb_common/src/config.rs | head -1
+
+    # 后续步骤保持不变...
+    - name: Restore bridge files
+      uses: actions/download-artifact@master
+      with:
+        name: bridge-artifact
+        path: ./
+    
+    # ... 后面的内容不变
 
 
       - name: Restore bridge files
