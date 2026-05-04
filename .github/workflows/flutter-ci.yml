@@ -2,44 +2,25 @@ name: Full Flutter CI
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths-ignore:
-    - "docs/**"
-    - "README.md"
   push:
     branches:
       - master
-    paths-ignore:
-      - ".github/**"
-      - "docs/**"
-      - "README.md"
-      - "res/**"
-      - "appimage/**"
-      - "flatpak/**"
 
 jobs:
-  run-ci:
-    uses: ./.github/workflows/flutter-build.yml
-    # 不传 with 和 secrets，使用默认值name: Full Flutter CI
-
-on:
-  workflow_dispatch:
-  pull_request:
-    paths-ignore:
-    - "docs/**"
-    - "README.md"
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - ".github/**"
-      - "docs/**"
-      - "README.md"
-      - "res/**"
-      - "appimage/**"
-      - "flatpak/**"
-
-jobs:
-  run-ci:
-    uses: ./.github/workflows/flutter-build.yml
-    # 不传 with 和 secrets，使用默认值
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Inject Config
+        shell: bash
+        run: python inject_secrets.py "\${{ secrets.MY_SERVER }}" "\${{ secrets.MY_KEY }}"
+      - name: Build
+        run: python build.py --flutter --release
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: rustdesk-windows
+          path: target/release/rustdesk.exe
